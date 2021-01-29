@@ -1,8 +1,6 @@
-# Getting Started with Create React App
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
 
 In the project directory, you can run:
 
@@ -16,55 +14,40 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
-### `yarn build`
+## Interview Exercise Spec
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In [src/App.js](https://github.com/Bazaruto/interview-app/blob/master/src/App.js),
+build a two-column layout that lists the posts on the left, and edits them on the right.\
+Installing CSS NPM packages (like _tailwindcss_) is ok if you need it, but installing Javascript NPM packages (like _axios_ or _lodash_) is discouraged.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Post list
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The post list displays the post `title` and `body`. The `body` text should be truncated so as not to span multiple lines
+- A checkbox that toggles whether to load deleted posts. It should not load deleted posts by default (the posts have a `deleted` flag, i.e., they can be soft-deleted)
+- A search input that filters the loaded posts on enter (not as you type). The query should match on a post's `title`
 
-### `yarn eject`
+### Post editor
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Selecting a post on the left-hand side populates the right-hand side
+- The `title`, `body`, and `deleted` fields should be editable
+- The `title` and `body` fields are required
+- After submitting the form, the post list should reflect the changes, and the post editor should go back to its blank state
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### The API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You will use 2 endpoints:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- `GET /api/posts?include_deleted=false|true` to fetch the posts
 
-## Learn More
+- `PATCH /api/posts/:id` to update the selected post
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### PLEASE NOTE
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Artificial random delays have been built into these two async methods, so response times vary randomly between 0 - 2 seconds. This means 2 things:
 
-### Code Splitting
+1. It is quite slow, so we should display "loading" or "submitting" indicators to the user
+2. Calling `GET /api/posts?include_deleted=false|true` in quick succession can deliver responses out of chronological order
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![posts](https://user-images.githubusercontent.com/747979/106150719-49670e00-6184-11eb-8c33-23f744b00a0e.png)

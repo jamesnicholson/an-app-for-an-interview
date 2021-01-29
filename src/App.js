@@ -1,8 +1,10 @@
 import './App.scss';
-import Posts from './api/Posts';
 
-// NOTE: This line below can be removed. It is just here to show how to use the Posts api.
-Posts.getAll({ includeDeleted: false }).then(data => console.log(data));
+/*
+  We've setup a mock API server that can be interacted with fetch:
+  "GET /api/posts?include_deleted=false|true" to fetch the posts
+  "PATCH /api/posts/:id" to update the selected post
+*/
 
 export default function App() {
   return (
