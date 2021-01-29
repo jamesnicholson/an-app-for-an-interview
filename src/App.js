@@ -7,7 +7,7 @@ Posts.getAll({ includeDeleted: false }).then(data => console.log(data));
 export default function App() {
   return (
     <div className="App">
-      <h1>Todo</h1>
+      <p>TODO: Posts app</p>
     </div>
   );
 }
