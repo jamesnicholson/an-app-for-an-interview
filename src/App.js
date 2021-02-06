@@ -3,7 +3,6 @@ import GlobalContext from './utils/context'
 //import reducer from './utils/reducer'
 import { useFetch } from './utils/useFetch'
 import Dashboard from './components/Dashboard/'
-import './App.scss';
 
 export default function App() {
 
@@ -14,10 +13,7 @@ export default function App() {
 
   return (
     <GlobalContext.Provider value={appData}>
-      <div className="App">
-        <p>TODO: Posts app</p>
         <Dashboard />
-      </div>  
     </GlobalContext.Provider>
   );
 }
