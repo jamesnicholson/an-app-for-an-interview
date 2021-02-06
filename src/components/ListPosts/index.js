@@ -12,14 +12,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ListPosts = (props) => {
     const { posts } = props;
-    console.log(posts)
     const classes = useStyles();
     if(posts){
-      return  posts.map((post, index)=> {
-        console.log(post.title)
-        return <Post key={index} title={post.title} body={post.body} />
-    })
+      return  posts.map((post, index) => <Post key={index} title={post.title} body={post.body} />)
     }
-    return ""
 };
 export default ListPosts;

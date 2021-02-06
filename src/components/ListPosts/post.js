@@ -19,25 +19,22 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
     const { id, title, body } = props;
     const classes = useStyles();
-    
-        return  <Card className={classes.root}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {title}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {body}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        Edit
-                    </Button>
-                </CardActions>
-            </Card>
-
-    
+    return  <Card className={classes.root}>
+                <CardActionArea>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {title}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {body}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            <CardActions>
+                <Button size="small" color="primary">
+                    Edit
+                </Button>
+            </CardActions>
+        </Card>
 };
 export default Post;

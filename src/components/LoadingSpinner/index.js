@@ -7,9 +7,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     paddingTop:'30px',
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
   },
   loader:{
     margin: '0 auto',

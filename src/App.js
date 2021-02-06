@@ -9,7 +9,6 @@ export default function App() {
   const { data, loading } = useFetch("/api/posts?include_deleted=false|true");
   const appData = useMemo(() => ({data, loading}));
   //const [state, dispatch] = useReducer(reducer, []);
-  console.log(loading, appData);
 
   return (
     <GlobalContext.Provider value={appData}>
@@ -17,10 +16,3 @@ export default function App() {
     </GlobalContext.Provider>
   );
 }
-
-
-/*
-  We've setup a mock API server that can be interacted with fetch:
-  "GET /api/posts?include_deleted=false|true" to fetch the posts
-  "PATCH /api/posts/:id" to update the selected post
-*/
