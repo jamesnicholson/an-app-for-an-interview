@@ -6,6 +6,7 @@ const GlobalContext = createContext({
         posts:[],
     },
     loading: true,
+    currentPostId: 0,
     updatePost: (id) => {}
 });
 export default GlobalContext;

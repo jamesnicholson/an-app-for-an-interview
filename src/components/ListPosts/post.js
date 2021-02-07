@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import GlobalContext from '../../utils/context'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,14 +20,24 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
     const { id, title, body } = props;
     const classes = useStyles();
-    return  <Card className={classes.root}>
+    const { setCurrentPostId } = useContext(GlobalContext);
+    const handleClick = (id) => {
+        setCurrentPostId(id)
+    }
+    const truncate = (input) => {
+        if (input.length > 5) {
+           return input.substring(0, 75) + '...';
+        }
+        return input;
+     };
+    return  <Card className={classes.root} onClick={()=>(handleClick(id))}>
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             {title}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {body}
+                            {truncate(body)}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

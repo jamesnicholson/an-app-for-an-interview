@@ -20,8 +20,8 @@ const SearchPosts = () => {
     const classes = useStyles();
     const { data, loading } = useContext(GlobalContext);
     const [list, setList] = useState([]);
-    const [checked, setChecked] = React.useState(false);
-    const [searchTerm, setSearchTerm] = React.useState("");
+    const [checked, setChecked] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
