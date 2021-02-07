@@ -7,13 +7,23 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/core/styles';
 import GlobalContext from '../../utils/context'
-
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 const useStyles = makeStyles((theme) => ({
-
     root: {
       display: 'flex',
       flexWrap: 'wrap',
     },
+    switch:{
+      marginBottom:'20px'
+    },
+    beach:{
+      display: 'inline-block',
+      fontSize:'20rem',
+      marginTop:'25px'
+    },
+    beachTowel: {
+      textAlign:'center'
+    }
   }));
 
 const EditPost = () => {
@@ -74,6 +84,7 @@ const EditPost = () => {
                       multiline
                     />
                     <FormControlLabel
+                      className={classes.switch}
                       control={
                         <Switch checked={post.deleted}
                           onChange={(event) => {
@@ -86,13 +97,16 @@ const EditPost = () => {
                       label="Disable Post?"
                       />
 
-                    <Button onClick={()=>save(post)} fullWidth variant="primary">
+                    <Button onClick={()=>save(post)} fullWidth color="primary" variant="contained">
                       Save
                     </Button>
                   </form>
                 </div>
     }
-    return ""
+    
+    return <div className={classes.beachTowel}>
+              <BeachAccessIcon className={classes.beach} />
+          </div>
 
 };
 export default EditPost;

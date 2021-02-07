@@ -14,7 +14,7 @@ export const GlobalContextProvider = props => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-      fetch("/api/posts?include_deleted=false|true")
+      fetch("/api/posts?include_deleted=true")
       .then(x => x.json())
       .then((data)=>{
           dispatch({

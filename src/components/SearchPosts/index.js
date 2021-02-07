@@ -3,11 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import GlobalContext from '../../utils/context'
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import EditPost from '../EditPost'
 import ListPosts from '../ListPosts'
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,14 +34,13 @@ const SearchPosts = () => {
       setSearchTerm(event.target.value)
     }
    useEffect(()=>{
-     console.log("refresh me")
-     console.log(posts.posts)
      if(checked){
+       console.log(state)
       setList(posts.posts)
      }else{
       setList(posts.posts.filter(({deleted})=>!deleted))
      }
-  },[state])
+  },[state.refresh, checked])
 
    useEffect(()=>{
      if(searchTerm){
@@ -52,18 +52,29 @@ const SearchPosts = () => {
 
     if(loading == false){
       return  <div className={classes.root}>
-                <FormControl component="fieldset" className={classes.formControl}>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox checked={checked} onChange={handleChange} name="gilad" />}
-                        label="Include Deleted"
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                       <TextField id="search" fullWidth label="Search" onChange={textChange} variant="outlined" />
-                    </FormGroup>
-                </FormControl>
-                <ListPosts posts={list} />
+
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <FormControl component="fieldset" className={classes.formControl}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={checked} onChange={handleChange} name="gilad" />}
+                    label="Include Deleted"
+                  />
+                </FormGroup>
+                <FormGroup>
+                    <TextField id="search" fullWidth label="Search" onChange={textChange} variant="outlined" />
+                </FormGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <ListPosts posts={list} />
+          </Grid>
+          <Grid item xs={6}>
+            <EditPost />
+          </Grid>
+        </Grid>
+
               </div>
     }
     return "";
