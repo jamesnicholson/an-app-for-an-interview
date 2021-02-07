@@ -89,7 +89,6 @@ const EditPost = () => {
                       control={
                         <Switch checked={post.deleted}
                           onChange={(event) => {
-                            console.log(event.target.checked )
                             setPost({ ...post, deleted: event.target.checked });
                           }}
                           name="disable_post"

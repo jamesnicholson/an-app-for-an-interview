@@ -45,7 +45,6 @@ const Post = (props) => {
         }
         return input;
      };
-     console.log(deleted)
     return  <Card className={deleted ? classes.deletedRoot : classes.root} onClick={()=>(handleClick(id))}>
                 <CardActionArea>
                     <CardContent>

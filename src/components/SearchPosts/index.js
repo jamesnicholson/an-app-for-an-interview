@@ -35,7 +35,6 @@ const SearchPosts = () => {
     }
    useEffect(()=>{
      if(checked){
-       console.log(state)
       setList(posts.posts)
      }else{
       setList(posts.posts.filter(({deleted})=>!deleted))

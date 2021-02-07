@@ -1,7 +1,6 @@
 import {FETCH_POSTS, UPDATE_POST, SELECTED_POST, REFRESH_POSTS} from './enums'
 
 const updatePost = (payload, state) => {
-    console.log(payload);
     return {
         ...state,
        ...payload
