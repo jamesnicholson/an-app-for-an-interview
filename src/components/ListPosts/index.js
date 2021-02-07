@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      backgroundColor:'#333'
     },
   }));
 

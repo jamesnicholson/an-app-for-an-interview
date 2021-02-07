@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      margin:'10px'
+      marginBottom:'10px'
     },
   }));
 

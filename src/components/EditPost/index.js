@@ -27,20 +27,18 @@ const EditPost = () => {
     },[currentPostId])
 
     const save = (_post) => {
-      console.log(_post)
-     // setDeleted(e.target.checked)
+        try {
+           fetch(`/api/posts/${_post.id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+              body: JSON.stringify(_post),
+          });
+      } catch(ex) {
+        console.log(ex)
+       }
     }
-    const updateTitle = (e) => {
-      
-      post.title = e.target.value
-      console.log(post.title)
-      setPost(post)
-      
-    }
 
-
-
-    if(post){
+    if(Object.keys(post).length !== 0 ){
       return   <div>
                   <h2>Edit post</h2>
                   <form>
@@ -74,7 +72,6 @@ const EditPost = () => {
                       Save
                     </Button>
                   </form>
-
                 </div>
     }
     return ""

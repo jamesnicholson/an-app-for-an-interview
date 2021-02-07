@@ -11,9 +11,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ListPosts from '../ListPosts'
 const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
+      marginBottom: '15px'
     },
+    formControl: {
+      width:'100%',
+      marginBottom: '15px'
+    }
   }));
 
 const SearchPosts = () => {
@@ -45,7 +48,7 @@ const SearchPosts = () => {
   },[searchTerm])
 
     if(loading == false){
-      return  <div>
+      return  <div className={classes.root}>
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormGroup>
                       <FormControlLabel
@@ -54,7 +57,7 @@ const SearchPosts = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                       <TextField id="search" label="Search" onChange={textChange} variant="outlined" />
+                       <TextField id="search" fullWidth label="Search" onChange={textChange} variant="outlined" />
                     </FormGroup>
                 </FormControl>
                 <ListPosts posts={list} />
