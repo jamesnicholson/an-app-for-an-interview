@@ -3,6 +3,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import TextField from '@material-ui/core/TextField';
 import {FETCH_POSTS, REFRESH_POSTS} from '../../utils/enums';
 import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/core/styles';
 import GlobalContext from '../../utils/context'
 
@@ -19,8 +21,9 @@ const EditPost = () => {
     const classes = useStyles();
     const [ state, dispatch ] = useContext(GlobalContext);
     const { posts, selected_post_id } = state;
+
     useEffect(() => {
-      if(selected_post_id > 0){
+      if(selected_post_id > 0) {
         setPost(posts.posts.filter(({id}) => id == selected_post_id).slice(0)[0]);
       }
     },[selected_post_id])
@@ -32,7 +35,7 @@ const EditPost = () => {
             body: JSON.stringify(_post),
         }).then(() => {
           dispatch({
-            type: "REFRESH_POSTS",
+            type: REFRESH_POSTS,
               payload: {
                 refresh:true
               }
@@ -70,7 +73,20 @@ const EditPost = () => {
                       name="body"
                       multiline
                     />
-                    <Button onClick={()=>save(post)}>
+                    <FormControlLabel
+                      control={
+                        <Switch checked={post.deleted}
+                          onChange={(event) => {
+                            console.log(event.target.checked )
+                            setPost({ ...post, deleted: event.target.checked });
+                          }}
+                          name="disable_post"
+                        />
+                      }
+                      label="Disable Post?"
+                      />
+
+                    <Button onClick={()=>save(post)} fullWidth variant="primary">
                       Save
                     </Button>
                   </form>
