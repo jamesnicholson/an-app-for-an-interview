@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Container from '@material-ui/core/Container';
+import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,14 +16,26 @@ const useStyles = makeStyles((theme) => ({
   loader:{
     margin: '0 auto',
     
-  }
+  },
+  backdrop: {
+    backgroundColor:'#00000060',
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 }));
 
 
 const LoadingSpinner = () => {
+  const [open, setOpen] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   const classes = useStyles();
-  return  <Container className={classes.root}>
+  return  <Backdrop className={classes.backdrop} open={open} onClick={handleClose} >
             <CircularProgress className={classes.loader} />
-          </Container>
+          </Backdrop>
 };
 export default LoadingSpinner;
