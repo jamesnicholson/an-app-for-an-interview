@@ -47,7 +47,8 @@ const EditPost = () => {
           dispatch({
             type: REFRESH_POSTS,
               payload: {
-                refresh:true
+                refresh:true,
+    
               }
           });
         });
@@ -97,7 +98,11 @@ const EditPost = () => {
                       label="Disable Post?"
                       />
 
-                    <Button onClick={()=>save(post)} fullWidth color="primary" variant="contained">
+                    <Button 
+                      onClick={()=>save(post)}
+                      disabled={state.refresh ? true : false}
+                      fullWidth color="primary"
+                      variant="contained">
                       Save
                     </Button>
                   </form>
