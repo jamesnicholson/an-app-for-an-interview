@@ -4,7 +4,7 @@ const updatePost = (payload, state) => {
     console.log(payload);
     return {
         ...state,
-        refresh: payload
+       ...payload
     };
 }
 const selectedPost = (payload, state) => {

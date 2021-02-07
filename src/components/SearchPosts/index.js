@@ -33,12 +33,14 @@ const SearchPosts = () => {
       setSearchTerm(event.target.value)
     }
    useEffect(()=>{
+     console.log("refresh me")
+     console.log(posts.posts)
      if(checked){
       setList(posts.posts)
      }else{
       setList(posts.posts.filter(({deleted})=>!deleted))
      }
-  },[checked])
+  },[state])
 
    useEffect(()=>{
      if(searchTerm){

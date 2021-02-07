@@ -21,16 +21,14 @@ export const GlobalContextProvider = props => {
             type: "FETCH_POSTS",
               payload: {
                 posts: data,
-                loading:false
+                loading:false,
+                refresh:false
               }
           });
         })
     },[state.refresh])
   
 
-    useEffect(()=>{
-      console.log(state)
-    },[state])
   
   
     return (
