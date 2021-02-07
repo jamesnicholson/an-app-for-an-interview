@@ -16,5 +16,6 @@ const ListPosts = (props) => {
     if(posts){
       return  posts.map((post, index) => <Post key={index} title={post.title} body={post.body} />)
     }
+    return "";
 };
 export default ListPosts;

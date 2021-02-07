@@ -7,7 +7,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 import ListPosts from '../ListPosts'
 const useStyles = makeStyles((theme) => ({
@@ -22,16 +21,28 @@ const SearchPosts = () => {
     const { data, loading } = useContext(GlobalContext);
     const [list, setList] = useState([]);
     const [checked, setChecked] = React.useState(false);
+    const [searchTerm, setSearchTerm] = React.useState("");
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
+    const textChange = (event) => {
+      setSearchTerm(event.target.value)
+    }
    useEffect(()=>{
      if(checked){
-      setList(data.posts.filter(({deleted})=>!deleted))
+      setList(data.posts)
      }else{
-      setList(data.posts.filter(({deleted})=>deleted))
+      setList(data.posts.filter(({deleted})=>!deleted))
      }
   },[checked])
+
+   useEffect(()=>{
+     if(searchTerm){
+       setList(data.posts.filter(({title, body})=> {
+         return title.toLowerCase().includes(searchTerm) || body.toLowerCase().includes(searchTerm)
+       }))
+     }
+  },[searchTerm])
 
     if(loading == false){
       return  <div>
@@ -43,9 +54,8 @@ const SearchPosts = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                       <TextField id="search" label="Search" variant="outlined" />
+                       <TextField id="search" label="Search" onChange={textChange} variant="outlined" />
                     </FormGroup>
-                 
                 </FormControl>
                 <ListPosts posts={list} />
               </div>
