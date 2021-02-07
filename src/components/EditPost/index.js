@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import {FETCH_POSTS, REFRESH_POSTS} from '../../utils/enums';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import GlobalContext from '../../utils/context'
@@ -28,15 +26,18 @@ const EditPost = () => {
     },[selected_post_id])
 
     const save = (_post) => {
-        try {
-           fetch(`/api/posts/${_post.id}`, {
-              method: 'PATCH',
-              headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-              body: JSON.stringify(_post),
+        fetch(`/api/posts/${selected_post_id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+            body: JSON.stringify(_post),
+        }).then(() => {
+          dispatch({
+            type: "REFRESH_POSTS",
+              payload: {
+                refresh:true
+              }
           });
-      } catch(ex) {
-        console.log(ex)
-       }
+        });
     }
 
     if(Object.keys(post).length !== 0 ){

@@ -1,8 +1,11 @@
-import {FETCH_POSTS, UPDATE_POST, SELECTED_POST} from './enums'
+import {FETCH_POSTS, UPDATE_POST, SELECTED_POST, REFRESH_POSTS} from './enums'
 
-const updatePost = (id, state) => {
-    console.log(id)
-    return state;
+const updatePost = (payload, state) => {
+    console.log(payload);
+    return {
+        ...state,
+        refresh: payload
+    };
 }
 const selectedPost = (payload, state) => {
     return {
@@ -21,7 +24,7 @@ export default (state, action) => {
     switch(action.type){
         case FETCH_POSTS :
             return fetchPosts(action.payload, state)
-        case UPDATE_POST :
+        case REFRESH_POSTS :
             return updatePost(action.payload, state)
         case SELECTED_POST :
             return selectedPost(action.payload, state)

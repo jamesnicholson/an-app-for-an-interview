@@ -25,7 +25,7 @@ export const GlobalContextProvider = props => {
               }
           });
         })
-    },[])
+    },[state.refresh])
   
 
     useEffect(()=>{
