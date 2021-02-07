@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchPosts = () => {
     const classes = useStyles();
-    const { data, loading } = useContext(GlobalContext);
+    const [state]= useContext(GlobalContext);
+    const {posts, loading} = state;
     const [list, setList] = useState([]);
     const [checked, setChecked] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -33,15 +34,15 @@ const SearchPosts = () => {
     }
    useEffect(()=>{
      if(checked){
-      setList(data.posts)
+      setList(posts.posts)
      }else{
-      setList(data.posts.filter(({deleted})=>!deleted))
+      setList(posts.posts.filter(({deleted})=>!deleted))
      }
   },[checked])
 
    useEffect(()=>{
      if(searchTerm){
-       setList(data.posts.filter(({title, body})=> {
+       setList(posts.posts.filter(({title, body})=> {
          return title.toLowerCase().includes(searchTerm) || body.toLowerCase().includes(searchTerm)
        }))
      }

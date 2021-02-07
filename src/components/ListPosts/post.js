@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import {SELECTED_POST} from '../../utils/enums';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import GlobalContext from '../../utils/context'
@@ -20,9 +20,15 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
     const { id, title, body } = props;
     const classes = useStyles();
-    const { setCurrentPostId } = useContext(GlobalContext);
+    const [state, dispatch ]= useContext(GlobalContext);
+
     const handleClick = (id) => {
-        setCurrentPostId(id)
+        dispatch({
+            type: SELECTED_POST,
+            payload:{
+                selected_post_id: id
+            }
+        })
     }
     const truncate = (input) => {
         if (input.length > 5) {

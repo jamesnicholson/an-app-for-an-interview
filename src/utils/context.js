@@ -1,12 +1,45 @@
 
-import { createContext } from "react";
+import { createContext , useReducer, useEffect } from "react";
+import reducer from './reducer'
 
-const GlobalContext = createContext({
-    data:{
-        posts:[],
-    },
+const initialState = {
+    posts:[],
     loading: true,
-    currentPostId: 0,
-    updatePost: (id) => {}
-});
+    selected_post_id: 0,
+    refresh:false,
+}
+const GlobalContext = createContext(initialState);
+
+export const GlobalContextProvider = props => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+      fetch("/api/posts?include_deleted=false|true")
+      .then(x => x.json())
+      .then((data)=>{
+          dispatch({
+            type: "FETCH_POSTS",
+              payload: {
+                posts: data,
+                loading:false
+              }
+          });
+        })
+    },[])
+  
+
+    useEffect(()=>{
+      console.log(state)
+    },[state])
+  
+  
+    return (
+      <GlobalContext.Provider value={[state, dispatch]}>
+        {props.children}
+      </GlobalContext.Provider>
+    );
+  };
+
+
+
 export default GlobalContext;

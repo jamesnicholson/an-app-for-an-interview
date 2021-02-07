@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GlobalContext from '../../utils/context'
 
 const useStyles = makeStyles((theme) => ({
+
     root: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -18,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
 const EditPost = () => {
     const [post, setPost] = useState({});
     const classes = useStyles();
-    const { currentPostId, data } = useContext(GlobalContext);
-    
+    const [ state, dispatch ] = useContext(GlobalContext);
+    const { posts, selected_post_id } = state;
     useEffect(() => {
-      if(currentPostId > 0){
-        setPost(data.posts.filter(({id}) => id == currentPostId).slice(0)[0]);
+      if(selected_post_id > 0){
+        setPost(posts.posts.filter(({id}) => id == selected_post_id).slice(0)[0]);
       }
-    },[currentPostId])
+    },[selected_post_id])
 
     const save = (_post) => {
         try {

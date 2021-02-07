@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
     const classes = useStyles();
-    const { loading } = useContext(GlobalContext);
-   if(loading){
+    const [ state ] = useContext(GlobalContext);
+    if(state.loading){
         return <LoadingSpinner />
     }
     return  <Container className={classes.root}>
